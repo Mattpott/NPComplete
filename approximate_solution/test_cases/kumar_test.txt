@@ -1,0 +1,19 @@
+18
+a b
+a c
+a e
+a f
+b d
+b g
+c d
+c h
+d i
+d j
+e g
+e k
+f h
+f k
+g i
+h j
+i k
+j k
