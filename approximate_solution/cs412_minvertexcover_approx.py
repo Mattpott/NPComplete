@@ -2,10 +2,22 @@
     name:  Matthew Potter
 """
 
+import matplotlib.pyplot as plt
+import networkx as nx
+from timeit import default_timer as timer
+
 
 # Approximation Algorithm:
-# https://tandy.cs.illinois.edu/dartmouth-cs-approx.pdf
-# https://cpsc.yale.edu/sites/default/files/files/tr404.pdf this one is bad tbh
+# *****************************************************************************
+# Title: Introduction to algorithms
+# Authors: Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest,
+#          and Clifford Stein
+# Date: 7 August, 2009
+# Source: https://dahlan.unimal.ac.id/files/ebooks/2009%20Introduction%20to%20Algorithms%20Third%20Ed.pdf
+# Formal citation:
+#   Introduction to algorithms (3rd edition), thomas h. cormen, charles e.
+#   leiserson, ronald l. rivest, and clifford stein
+# *****************************************************************************
 # *****************************************************************************
 # Title: Optimal Algorithm for Solving Vertex Cover Problem in Polynomial Time
 # Authors: Sharad Singh, Gaurav Singh, and Neeraj Kushwah
@@ -76,6 +88,7 @@ def approx_mvc(adj_list: dict[str, set]) -> set:
 def main():
     # build the graph using an adjacency list
     edge_count = int(input())
+    graph = nx.Graph()
     adj_list = {}
     for _ in range(edge_count):
         edge = input().split()
@@ -83,12 +96,49 @@ def main():
         v = edge[1]
         if u not in adj_list:
             adj_list[u] = set()
+            graph.add_node(u)
         if v not in adj_list:
             adj_list[v] = set()
+            graph.add_node(v)
         adj_list[u].add(v)
         adj_list[v].add(u)
+        graph.add_edge(u, v)
+    test_name = input()  # used for outputting graph images
+    start_time = timer()
     cover = approx_mvc(adj_list)
-    print(cover)
+    end_time = timer()
+    for vertex in sorted(cover):
+        print(vertex)
+    print(f"Time taken: {end_time - start_time} seconds")
+    # all under this is code to save the necessary graphs
+    # draw the initial graph
+    plt.subplot(121)
+    pos = nx.spring_layout(graph)
+    nx.draw(graph, with_labels=True, pos=pos)
+    plt.subplot(122)
+    # draw covered nodes red and other nodes stay normal color
+    nx.draw_networkx_nodes(graph, pos, nodelist=list(cover),
+                           node_color="tab:red")
+    uncovered = [u for u in adj_list.keys() if u not in cover]
+    nx.draw_networkx_nodes(graph, pos, nodelist=uncovered)
+    # draw the covered edges (should be all edges, but make sure)
+    covered_edges = set()
+    uncovered_edges = set()
+    for u in adj_list:
+        if u in cover:
+            for v in adj_list[u]:
+                covered_edges.add((u, v))  # should be all edges
+        else:
+            for v in adj_list[u]:
+                if v not in cover:
+                    uncovered_edges.add((u, v))  # should be empty
+    # draw covered edges with red highlight, uncovered stay normal
+    nx.draw_networkx_edges(graph, pos, edgelist=covered_edges,
+                           edge_color="tab:red", width=8, alpha=0.5)
+    nx.draw_networkx_edges(graph, pos, edgelist=uncovered_edges)
+    # draw labels as the graph should
+    nx.draw_networkx_labels(graph, pos)
+    plt.savefig(f"./test_cases/outputs/{test_name}_graphs.png")  # save graphs
 
 
 if __name__ == "__main__":
