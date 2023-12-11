@@ -1,20 +1,17 @@
 #!/bin/bash
-
 # predefined file paths
 exact_path=./
 approx_path=../approximate_solution/
-
 if [ $# -lt 1 ]; then
     ver="exact"
 else
     ver=$1
 fi
-
-if [ $ver == "exact" -o $ver == "e" ]; then
+if [ $ver == "exact" ] || [ $ver == "e" ]; then
     test_path="${exact_path}test_cases/"
     type="exact"
     executable_path=$exact_path
-elif [ $ver == "approx" -o $ver == "a" ]; then
+elif [ $ver == "approx" ] || [ $ver == "a" ]; then
     test_path="${approx_path}test_cases/"
     type="approx"
     executable_path=$approx_path
@@ -23,7 +20,6 @@ else
     echo "Expects either no arg, \"exact\", \"e\", \"approx\", or \"a\"."
     exit
 fi
-
 # iterate over the intended tests
 for file in "${test_path}inputs/"*.txt; do
     # extract the file name (with extension) from the path
