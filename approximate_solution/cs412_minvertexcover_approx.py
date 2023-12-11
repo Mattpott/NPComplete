@@ -15,8 +15,9 @@ from timeit import default_timer as timer
 # Date: 7 August, 2009
 # Source: https://dahlan.unimal.ac.id/files/ebooks/2009%20Introduction%20to%20Algorithms%20Third%20Ed.pdf
 # Formal citation:
-#   Introduction to algorithms (3rd edition), thomas h. cormen, charles e.
-#   leiserson, ronald l. rivest, and clifford stein
+#   Thomas H. Cormen, Charles E. Leiserson, Ronald l. Rivest, and Clifford
+#   Stein, Introduction to algorithms, MIT Press, 3rd edition, 7 August 2009,
+#   ISBN 978-0-262-03384-8.
 # *****************************************************************************
 # *****************************************************************************
 # Title: Optimal Algorithm for Solving Vertex Cover Problem in Polynomial Time
@@ -107,6 +108,7 @@ def main():
     start_time = timer()
     cover = approx_mvc(adj_list)
     end_time = timer()
+    print(f"Number of vertices in cover: {len(cover)}")
     for vertex in sorted(cover):
         print(vertex)
     print(f"Time taken: {end_time - start_time} seconds")

@@ -1,0 +1,13 @@
+Number of vertices in cover: 11
+13
+14
+16
+18
+19
+20
+24
+3
+5
+6
+9
+Time taken: 0.000571100000001934 seconds

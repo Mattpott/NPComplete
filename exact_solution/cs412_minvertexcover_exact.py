@@ -27,9 +27,9 @@ from timeit import default_timer as timer
 #          Engineering and Technology May 2009 issue
 # Source:https://gdeepak.com/thesisme/thesis-Choosing%20the%20Efficient%20Algorithm%20for%20Vertex%20Cover%20problem.pdf
 # Formal citation:
-#   K.V.R Kumar, Deepak Garg, Complete Algorithms on Minimum Vertex Cover
-#   CIIT International Journal of Software Engineering and Technology, Issue
-#   May 2009 ISSN 0974 – 9748 & Online: ISSN 0974 – 9632.
+#   K.V.R Kumar, Deepak Garg, 2009. Complete Algorithms on Minimum Vertex
+#   Cover. CIIT International Journal of Software Engineering and Technology,
+#   Issue May 2009 ISSN 0974 – 9748 & Online: ISSN 0974 – 9632.
 # ****************************************************************************
 def mvc(adj_list: dict[str, set]) -> set:
     # N(v) denotes the neighborhood of v (does not include v) [N(v) = {u in V | (u, v) is in E}]
@@ -55,10 +55,8 @@ def mvc(adj_list: dict[str, set]) -> set:
         """
         # base cases
         # if |C| + max (DegLB(G), ClqLB(G), SatLB(G)) >= UB
-        # if len(cover) >= upper_bound:
-        #    return cover  # return upper bound
-        if len(subgraph) == 0:
-            return cover
+        if len(subgraph) == 0 or len(cover) >= upper_bound:
+            return cover  # return upper bound
         # Select a vertex v from V with the maximum degree
         max_v = list(subgraph)
         max_v.sort(key=lambda v: len(adj_list[v]), reverse=True)
@@ -115,6 +113,7 @@ def main():
     start_time = timer()
     cover = mvc(adj_list)
     end_time = timer()
+    print(f"Number of vertices in cover: {len(cover)}")
     for vertex in sorted(cover):  # write out vertices as text
         print(vertex)
     print(f"Time taken: {end_time - start_time} seconds")  # write out runtime

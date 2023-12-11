@@ -1,0 +1,7 @@
+Number of vertices in cover: 5
+a
+d
+g
+h
+k
+Time taken: 1.5099999998824387e-05 seconds

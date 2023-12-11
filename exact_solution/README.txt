@@ -5,6 +5,8 @@ In order to run my tests, you will need python3 installed and accessible from th
 To test, run the script while rooted in the directory of the shell script.
 The script runs all files in the associated test_cases/inputs directory and outputs in the associated test_cases/outputs directory.
 
+WARNING: For the exact tests, the 95-vertex test case which runs for ~20 minutes is included in inputs. To not overwrite its output I recommend moving it from the test running folder when running the script so that the runner only take ~5 minutes rather than ~20.
+
 Argument possibilities:
 	<none> 	= runs exact solution on exact test cases
 	a	= runs approximate solution on approximate test cases
