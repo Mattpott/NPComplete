@@ -1,6 +1,7 @@
-In order to run my tests, you will need python3 installed and accessible from the BASH terminal as well as networkx installed for graph outputs.
+In order to run my tests, you will need python3 installed and accessible from the BASH terminal as well as networkx and matplotlib installed for graph outputs.
 
 	networkx can be installed by running `pip install networkx`
+	matplotlib can be installed by running `python -m pip install -U matplotlib`
 
 To test, run the script while rooted in the directory of the shell script.
 The script runs all files in the associated test_cases/inputs directory and outputs in the associated test_cases/outputs directory.
